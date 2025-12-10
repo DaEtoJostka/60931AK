@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Hello Blade</title>
+    <title>609-31</title>
 </head>
 <body>
     <h1>Hello from Blade!</h1>
