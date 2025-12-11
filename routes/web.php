@@ -1,11 +1,17 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CountryController;
+use App\Http\Controllers\EventController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/countries');
 });
 
-Route::get('/hello', function () {
-    return view('hello', ['data' => ['Alpha', 'Beta', 'Gamma']]);
-});
+// Country Routes
+Route::get('/countries', [CountryController::class, 'index']);
+Route::get('/countries/{id}', [CountryController::class, 'show']);
+
+// Event Routes
+Route::get('/events', [EventController::class, 'index']);
+Route::get('/events/{id}', [EventController::class, 'show']);
