@@ -38,7 +38,7 @@ class EventController extends Controller
         $event->date = $request->date;
         $event->save();
 
-        return redirect('/events');
+        return redirect('/events')->with('success', 'Событие успешно создано!');
     }
 
     public function show($id)
@@ -76,7 +76,7 @@ class EventController extends Controller
         $event->date = $request->date;
         $event->save();
 
-        return redirect('/events');
+        return redirect('/events')->with('success', 'Событие успешно обновлено!');
     }
 
     public function destroy($id)
@@ -87,6 +87,6 @@ class EventController extends Controller
 
         $event = Event::findOrFail($id);
         $event->delete();
-        return redirect('/events');
+        return redirect('/events')->with('success', 'Событие успешно удалено!');
     }
 }
