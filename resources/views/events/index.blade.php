@@ -7,6 +7,16 @@
 <body>
 <h2>Events List</h2>
 <a href="{{ url('/events/create') }}">Create Event</a>
+
+<form action="{{ url('/events') }}" method="GET">
+    <label for="per_page">Items per page:</label>
+    <select name="per_page" id="per_page" onchange="this.form.submit()">
+        <option value="5" {{ request('per_page') == 5 ? 'selected' : '' }}>5</option>
+        <option value="10" {{ request('per_page') == 10 ? 'selected' : '' }}>10</option>
+        <option value="15" {{ request('per_page') == 15 ? 'selected' : '' }}>15</option>
+        <option value="20" {{ request('per_page') == 20 ? 'selected' : '' }}>20</option>
+    </select>
+</form>
 <table border="1">
     <thead>
         <td>Date</td>
@@ -37,5 +47,6 @@
         </tr>
     @endforeach
 </table>
+{{ $events->links() }}
 </body>
 </html>

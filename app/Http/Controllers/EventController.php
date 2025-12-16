@@ -8,9 +8,10 @@ use Illuminate\Http\Request;
 class EventController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $events = Event::with('country')->get();
+        $perPage = $request->input('per_page', 5);
+        $events = Event::with('country')->paginate($perPage)->appends(['per_page' => $perPage]);
         return view('events.index', compact('events'));
     }
 
