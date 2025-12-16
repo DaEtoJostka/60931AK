@@ -6,6 +6,7 @@
 </head>
 <body>
 <h2>Events List</h2>
+<a href="{{ url('/events/create') }}">Create Event</a>
 <table border="1">
     <thead>
         <td>Date</td>
@@ -25,7 +26,13 @@
             </td>
             <td>{{ $event->description }}</td>
             <td>
-                <a href="{{ url('/events/' . $event->id) }}">View Details</a>
+                <a href="{{ url('/events/' . $event->id) }}">View</a>
+                <a href="{{ url('/events/' . $event->id . '/edit') }}">Edit</a>
+                <form action="{{ url('/events/' . $event->id) }}" method="POST" style="display:inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+                </form>
             </td>
         </tr>
     @endforeach
