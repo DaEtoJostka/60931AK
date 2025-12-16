@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use Illuminate\Http\Request;
 
+
+use Illuminate\Support\Facades\Gate;
+
 class EventController extends Controller
 {
 
@@ -46,6 +49,10 @@ class EventController extends Controller
 
     public function edit($id)
     {
+        if (! Gate::allows('edit-event')) {
+            abort(403, 'You are not authorized to edit events.');
+        }
+
         $event = Event::findOrFail($id);
         $countries = \App\Models\Country::all();
         return view('events.edit', compact('event', 'countries'));
@@ -53,6 +60,10 @@ class EventController extends Controller
 
     public function update(Request $request, $id)
     {
+        if (! Gate::allows('edit-event')) {
+            abort(403, 'You are not authorized to update events.');
+        }
+
         $request->validate([
             'country_id' => 'required|exists:countries,id',
             'description' => 'required',
@@ -70,6 +81,10 @@ class EventController extends Controller
 
     public function destroy($id)
     {
+        if (! Gate::allows('delete-event')) {
+            abort(403, 'You are not authorized to delete events.');
+        }
+
         $event = Event::findOrFail($id);
         $event->delete();
         return redirect('/events');
