@@ -18,7 +18,6 @@ Route::get('/countries', [CountryController::class, 'index']);
 Route::get('/countries/{id}', [CountryController::class, 'show']);
 
 Route::get('/events', [EventController::class, 'index']);
-Route::get('/events/{id}', [EventController::class, 'show']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/events/create', [EventController::class, 'create']);
@@ -27,3 +26,5 @@ Route::middleware('auth')->group(function () {
     Route::put('/events/{id}', [EventController::class, 'update']);
     Route::delete('/events/{id}', [EventController::class, 'destroy']);
 });
+
+Route::get('/events/{id}', [EventController::class, 'show']);
